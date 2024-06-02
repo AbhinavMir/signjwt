@@ -62,9 +62,9 @@ The system involves several key cryptographic operations for authentication and 
 When a new user is registered, an RSA key pair is generated. RSA is an asymmetric cryptographic algorithm used for secure data transmission.
 
 - **Key Generation**: 
-  $$$
+  $$
   (e, d, n) \leftarrow RSAKeyGen(bitsize)
-  $$$
+  $$
   - $e$ is the public exponent (usually 65537).
   - $d$ is the private exponent.
   - $n$ is the modulus, the product of two large prime numbers $p$ and $q$.
@@ -75,24 +75,24 @@ The user's public key $K_{pub} = (e, n)$ is stored in the database, while the pr
 Upon registration, the user's public key and user ID are stored in the database.
 
 - **Database Operation**:
-  $$$
+  $$
   INSERT INTO_{users} (userid, publickey) VALUES (?, ?)
-  $$$
+  $$
 
 #### 3. Login and Nonce Generation
 During login, a nonce—a unique, random string used to ensure freshness of the request—is generated.
 
 - **Nonce Generation**:
-  $$$
+  $$
   nonce \leftarrow SecureRandomString(16)
-  $$$
+  $$
 
 The nonce, along with its expiration time, is associated with the user and stored in the database.
 
 - **JWT Generation**:
-  $$$
+  $$
   JWT = Encode(payload, SECRET\_KEY, algorithm)
-  $$$
+  $$
   - `payload` includes the user ID, the expiration time, and the nonce.
   - The JWT is signed using the HMAC with SHA-256 algorithm, where `SECRET_KEY` is the key.
 
@@ -100,43 +100,43 @@ The nonce, along with its expiration time, is associated with the user and store
 When accessing protected resources, the user must provide a JWT and a digital signature proving possession of their private key.
 
 - **JWT Verification**:
-  $$$
+  $$
   \text{Verify}(JWT, SECRET\_KEY, algorithm)
-  $$$
+  $$
 
 - **Signature Verification**:
   - The user creates a signature using their private RSA key on a message that concatenates the nonce and the JWT.
-  $$$
+  $$
   signature \leftarrow RSASign(K_{priv}, \text{hash}(nonce || JWT))
-  $$$
+  $$
   - The server verifies the signature using the user's public key.
   
-  $$$
+  $$
   RSASignVerify(K_{pub}, \text{hash}(nonce || JWT), signature)
-  $$$
+  $$
 
 #### 5. Cryptographic Methods
 - **Digital Signature**:
   - $M$ = message to be signed (nonce concatenated with JWT).
   - The signature involves padding and hashing the message:
-    $$$
+    $$
     \sigma \leftarrow K_{priv}(Hash(M))
-    $$$
+    $$
   - Verification:
-    $$$
+    $$
     K_{pub}(\sigma) \stackrel{?}{=} Hash(M)
-    $$$
+    $$
 
 - **Hash Function**:
   - SHA-256 is used for hashing:
-    $$$
+    $$
     hash \leftarrow SHA256(message)
-    $$$
+    $$
 
 - **Base64 Encoding**:
   - Signatures are base64-encoded for transmission.
-    $$$
+    $$
     encoded\_signature \leftarrow Base64Encode(signature)
-    $$$
+    $$
 
 This detailed cryptographic write-up explains how encryption, hashing, and digital signatures are implemented to ensure secure user authentication and data integrity in the system.
