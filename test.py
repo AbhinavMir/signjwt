@@ -116,17 +116,18 @@ def main():
         return
 
     print("Logged in successfully:", login_data)
+    print("_____")
     jwt = login_data.get("jwt")
-    print("JWT:", jwt)
+    # print("JWT:", jwt)
     nonce = login_data.get("nonce")
-    print("Nonce:", nonce)
+    # print("Nonce:", nonce)
 
     # Access protected resource
     access_protected(jwt, nonce, private_key)
     access_unprotected(jwt)
     
     # try to access protected after a user has logged out
-    baduser_id = "baduser"
+    baduser_id = "baduser1"
     if not user_exists(baduser_id):
         print(f"User {baduser_id} does not exist.")
         baduser_private_key, baduser_public_key = generate_keys()

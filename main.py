@@ -32,6 +32,7 @@ def db_connection():
         print(e)
     return conn
 
+
 @app.on_event("startup")
 def startup():
     conn = db_connection()

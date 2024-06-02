@@ -3,3 +3,5 @@ pydantic
 python-jose[cryptography]
 cryptography
 requests
+jwt
+uvicorn
