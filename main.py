@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, Request, Body
 from pydantic import BaseModel
 from datetime import datetime, timedelta
 import jwt
-from jwt.exceptions import InvalidSignatureError
+from jwt import InvalidSignatureError
 import sqlite3
 import secrets
 from cryptography.hazmat.primitives import hashes
