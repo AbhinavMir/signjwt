@@ -1,0 +1,6 @@
+fastapi
+pydantic
+python-jose[cryptography]
+cryptography
+requests
+base64-url
