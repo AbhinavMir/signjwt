@@ -11,7 +11,6 @@ from cryptography.hazmat.primitives.serialization import load_pem_public_key
 import base64
 from json import JSONDecodeError
 
-
 app = FastAPI()
  
 DATABASE = 'app.db'

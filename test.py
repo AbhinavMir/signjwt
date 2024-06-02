@@ -145,7 +145,5 @@ def main():
         access_protected(baduser_jwt, baduser_nonce, private_key)
         access_unprotected(baduser_jwt)
 
-
-
 if __name__ == "__main__":
     main()
