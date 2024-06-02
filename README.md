@@ -12,5 +12,5 @@ uvicorn main:app
 
 In another terminal, run the following command to start the client:
 ```
-python client.py
+python test.py
 ```
