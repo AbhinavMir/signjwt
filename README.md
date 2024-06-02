@@ -1,4 +1,4 @@
-### how to run
+### On how to run
 
 First, install the required packages:
 ```
